@@ -1,6 +1,7 @@
 name: dca-site-environment
 channels:
-  - conda-forge/packages/poppler
+  - conda-forge/
 dependencies:
+  - poppler
   - numpy
   - pdf2image
