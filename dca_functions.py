@@ -1,5 +1,5 @@
 from random import choice
-from IPython.display import Image
+from IPython.display import Image, display
 from numpy.random import choice as npchoice
 import abjad
 import convert_image
@@ -111,6 +111,6 @@ def output_ly(sequence):
     lilypond_file.header_block.title = abjad.Markup("Dissonant Counterpoint Pitch Sequence")
     #abjad.show(staff, pdf_file_path="dca_ps.pdf")
 
-    abjad.persist(score).as_pdf("dca_ps.pdf")
+    abjad.persist(score).as_pdf("imgs/dca_ps.pdf")
     convert_image.get_abjad_output()
-    Image("dca_ps.png")
+    display(Image("imgs/dca_ps.png"))

@@ -6,5 +6,5 @@ from pdf2image.exceptions import (
 )
 
 def get_abjad_output():
-    filename = "dca_ps.pdf"
-    image = convert_from_path(filename, fmt="png", single_file=True, output_file="dca_ps")
+    filename = "imgs/dca_ps.pdf"
+    image = convert_from_path(filename, fmt="png", single_file=True, output_folder="imgs", output_file="dca_ps")
