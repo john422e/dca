@@ -6,3 +6,4 @@ dependencies:
   - poppler
   - numpy
   - pdf2image
+  - abjad
