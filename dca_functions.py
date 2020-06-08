@@ -105,13 +105,12 @@ def output_ly(sequence):
         notes.append(note)
 
     staff = abjad.Staff(notes)
-    score = abjad.Score(staff)
+    score = abjad.Score([staff])
     lilypond_file = abjad.LilyPondFile.new(score, global_staff_size=20,
                                         default_paper_size=('letter', 'portrait'))
     lilypond_file.header_block.title = abjad.Markup("Dissonant Counterpoint Pitch Sequence")
-    abjad.show(lilypond_file, pdf_file_path=filename)
+    #abjad.show(staff, pdf_file_path="dca_ps.pdf")
 
-
-    abjad.show(staff, pdf_file_path="dca_ps.pdf")
+    abjad.persist(score).as_pdf("dca_ps.pdf")
     convert_image.get_abjad_output()
     Image("dca_ps.png")
