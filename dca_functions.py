@@ -1,6 +1,8 @@
 from random import choice
+from IPython.display import Image
 from numpy.random import choice as npchoice
 import abjad
+import convert_image
 
 def make_random_pitch_sequence(offset, length, pitch_range_slider):
     pitches = list(range(pitch_range_slider.value[0], pitch_range_slider.value[1]+1))
@@ -104,3 +106,5 @@ def output_ly(sequence):
 
     staff = abjad.Staff(notes)
     abjad.show(staff, pdf_file_path="dca_ps.pdf")
+    convert_image.get_abjad_output()
+    Image("dca_ps.png")

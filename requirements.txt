@@ -2,3 +2,4 @@ numpy
 ipywidgets
 IPython
 abjad
+pdf2image
