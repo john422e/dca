@@ -103,4 +103,4 @@ def output_ly(sequence):
         notes.append(note)
 
     staff = abjad.Staff(notes)
-    abjad.show(staff)
+    abjad.show(staff, pdf_file_path="dca_ps.pdf")
