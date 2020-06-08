@@ -58,7 +58,7 @@ def make_dca_spaced_pitch_sequence(offset, weights_option, length, pitch_range_s
             weight = (i+1) ** 2
             weights.append(weight)
 
-    print(weights)
+    print("Weights:", weights, "\n")
 
     pcprobs = get_probs(weights, counts)
 
