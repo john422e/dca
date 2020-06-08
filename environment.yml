@@ -1,0 +1,7 @@
+name: dca-site-environment
+channels:
+  - conda-poppler
+dependencies:
+  - numpy
+  - pdf2image
+  - abjad
