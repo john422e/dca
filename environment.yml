@@ -3,8 +3,6 @@ channels:
   - conda-forge
   - tiagoantao
 dependencies:
-  - nbextensions
-  - jupyter_contrib_extensions
   - poppler
   - numpy
   - pdf2image
