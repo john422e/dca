@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, randrange
 from IPython.display import Image, display
 from numpy.random import choice as npchoice
 import abjad
@@ -29,8 +29,9 @@ def get_probs(weights, counts):
 def growth_function(n): # Tenney's convex growth function
     return 2**n
 
-def make_dca_spaced_pitch_sequence(offset, weights_option, length, pitch_range_slider, show_data=False, print_ly=False):
-    pitches = list(range(pitch_range_slider.value[0], pitch_range_slider.value[1]+1))
+def make_dca_spaced_pitch_sequence(offset, weights_option, length, pitch_range_slider, pitches=None, show_data=False, print_ly=False):
+    if not pitches:
+        pitches = list(range(pitch_range_slider.value[0], pitch_range_slider.value[1]+1))
     counts = [0] * len(pitches)
 
     weights = []
@@ -58,7 +59,8 @@ def make_dca_spaced_pitch_sequence(offset, weights_option, length, pitch_range_s
             weight = (i+1) ** 2
             weights.append(weight)
 
-    print("Weights:", weights, "\n")
+    if show_data:
+        print("Weights:", weights, "\n")
 
     pcprobs = get_probs(weights, counts)
 
@@ -93,11 +95,11 @@ def make_dca_spaced_pitch_sequence(offset, weights_option, length, pitch_range_s
         note_count += 1
 
     if print_ly:
-        output_ly(sequence)
+        output_sequence_ly(sequence)
 
     return sequence
 
-def output_ly(sequence):
+def output_sequence_ly(sequence):
     notes = []
     for pitch in sequence:
         duration = abjad.Duration(1, 4)
@@ -111,6 +113,45 @@ def output_ly(sequence):
     lilypond_file.header_block.title = abjad.Markup("Dissonant Counterpoint Pitch Sequence")
     #abjad.show(staff, pdf_file_path="dca_ps.pdf")
 
-    abjad.persist(score).as_pdf("imgs/dca_ps.pdf")
-    convert_image.get_abjad_output()
-    display(Image("imgs/dca_ps.png"))
+    pdf_file = "imgs/dca_ps.pdf"
+    png_file = "imgs/dca_ps.png"
+    abjad.persist(score).as_pdf(pdf_file)
+    convert_image.get_abjad_output(pdf_file, png_file)
+    display(Image(png_file))
+
+def make_clang(offset, deviation, weights_option, undeviated_length, length, pitch_range_slider, pitches=None, show_data=False, print_ly=False):
+    # length = average length +/- deviation range
+    deviated_length = undeviated_length + randrange(deviation*-1, deviation)
+    length.value = int(deviated_length)
+    sequence = make_dca_spaced_pitch_sequence(offset, weights_option, length, pitch_range_slider, pitches=pitches, show_data=show_data, print_ly=print_ly)
+    sequence.append("rest") # end every clang with a rest
+    return sequence
+
+def output_clangs_ly(clangs):
+    notes = []
+    for clang in clangs:
+        for pitch in clang:
+            if pitch == "rest":
+                notes.append(abjad.Rest('r8'))
+            else:
+                duration = abjad.Duration(1, 8)
+                note = abjad.Note(pitch, duration)
+                notes.append(note)
+
+    staff = abjad.Staff(notes)
+
+    score = abjad.Score([staff])
+    lilypond_file = abjad.LilyPondFile.new(score, global_staff_size=20,
+                                        default_paper_size=('letter', 'portrait'))
+    lilypond_file.header_block.title = abjad.Markup("Dissonant Counterpoint Example Piece")
+    #abjad.show(staff, pdf_file_path="dca_ps.pdf")
+
+    pdf_file = "imgs/dca_piece.pdf"
+    png_file = "imgs/dca_piece.png"
+    png_stem = png_file[:-4]
+    abjad.persist(score).as_pdf(pdf_file)
+    total_pngs = convert_image.get_abjad_output(pdf_file, png_file, multiple_pages=True)
+    for i in range(total_pngs):
+        png_file = png_stem + str(i) + ".png"
+        print(png_file)
+        display(Image(png_file))
