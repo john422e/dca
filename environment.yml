@@ -5,3 +5,6 @@ dependencies:
   - poppler
   - numpy
   - pdf2image
+  - jupyter_contrib_nbextensions
+  - pip:
+    - abjad
