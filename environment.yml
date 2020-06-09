@@ -1,5 +1,6 @@
 name: dca-site-environment
 channels:
+  - defaults
   - conda-forge
   - tiagoantao
 dependencies:
