@@ -1,6 +1,6 @@
 name: dca-site-environment
 channels:
-  - defaults
+  #- defaults
   - conda-forge
   - tiagoantao
 dependencies:
@@ -8,5 +8,5 @@ dependencies:
   - numpy
   - pdf2image
   - abjad
-  - jupyter_nbextensions_configurator
-  - jupyter_contrib_nbextensions
+  #- jupyter_nbextensions_configurator
+  #- jupyter_contrib_nbextensions
