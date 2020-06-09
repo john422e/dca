@@ -1,9 +1,0 @@
-name: Dissonant Counterpoint in James Tenney's Seegersongs
-channels:
-  - conda-forge
-  - tiagoantao
-dependencies:
-  - poppler
-  - numpy
-  - pdf2image
-  - abjad
