@@ -7,3 +7,5 @@ dependencies:
   - numpy
   - pdf2image
   - abjad
+  - jupyter_nbextensions_configurator
+  - jupyter_contrib_nbextensions

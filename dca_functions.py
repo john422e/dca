@@ -114,10 +114,11 @@ def output_sequence_ly(sequence):
     #abjad.show(staff, pdf_file_path="dca_ps.pdf")
 
     pdf_file = "imgs/dca_ps.pdf"
-    png_file = "imgs/dca_ps.png"
+    png_file1 = "imgs/dca_ps.png"
+    png_file2 = "imgs/dca_ps0.png"
     abjad.persist(score).as_pdf(pdf_file)
-    convert_image.get_abjad_output(pdf_file, png_file)
-    display(Image(png_file))
+    image = convert_image.get_abjad_output(pdf_file, png_file1, multiple_pages=True)
+    display(Image(png_file2))
 
 def make_clang(offset, deviation, weights_option, undeviated_length, length, pitch_range_slider, pitches=None, show_data=False, print_ly=False):
     # length = average length +/- deviation range

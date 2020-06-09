@@ -8,7 +8,10 @@ from pdf2image.exceptions import (
 def get_abjad_output(pdf_file, png_file, multiple_pages=False):
     png_stem = png_file[:-4]
     if not multiple_pages:
-        image = convert_from_path(pdf_file, fmt="png", single_file=True, output_folder="imgs", output_file=png_stem)
+        convert_from_path(pdf_file, fmt="png", single_file=True, output_folder="imgs", output_file=png_stem)
+
+        #image = convert_from_path(pdf_file, fmt="png", single_file=True, output_folder="imgs", output_file=png_stem)
+        #image.save(png_file, "PNG")
     else:
         images = convert_from_path(pdf_file)
         for i, image in enumerate(images):
