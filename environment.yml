@@ -1,5 +1,7 @@
 name: dca-site-environment
 channels:
-  - tiagoantao
+  - conda-forge
 dependencies:
-  - abjad
+  - poppler
+  - numpy
+  - pdf2image
